@@ -9,31 +9,29 @@ on:
 jobs:
   newman-tests:
     runs-on: ubuntu-latest
+    timeout-minutes: 10
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout code
+        uses: actions/checkout@v4
 
-      - uses: actions/setup-node@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
         with:
           node-version: '18'
 
-      - run: npm ci
+      - name: Install dependencies
+        run: |
+          npm ci
+          mkdir -p reports
 
-      - run: npm run test:api
+      - name: Run Newman demo tests
+        run: npm run test:api
 
-      - name: 📂 Archive test reports
-        if: always()
-        uses: actions/upload-artifact@v2
-        with:
-          name: newman-reports
-          path: |
-            reports/junit.xml
-            reports/report.html
-
-      - name: ✅ Publish JUnit to GitHub Checks
+      - name: Publish JUnit to GitHub Checks
         if: always()
         uses: dorny/test-reporter@v1
         with:
-          name: Newman API Tests
+          name: Newman Demo Tests
           path: reports/junit.xml
           reporter: junit
