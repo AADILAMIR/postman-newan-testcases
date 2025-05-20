@@ -1,9 +1,9 @@
 {
-  "name": "Echo Demo Env",
+  "name": "Demo Env",
   "values": [
     {
       "key": "baseUrl",
-      "value": "https://postman-echo.com",
+      "value": "https://jsonplaceholder.typicode.com",
       "enabled": true
     }
   ],
