@@ -34,4 +34,5 @@ jobs:
         with:
           name: Newman Demo Tests
           path: reports/junit.xml
-          reporter: junit
+          reporter: java-junit
+
